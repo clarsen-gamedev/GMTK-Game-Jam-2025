@@ -2,8 +2,10 @@
  * Name: CarController.cs
  * Author: Connor Larsen
  * Date: 07/30/2025
- * Description: Controls the car
+ * 
+ * Controls the car
 /=========================================================================*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,20 +63,6 @@ public class CarController : MonoBehaviour
         ApplyMovement();
         ApplyTurning();
         LimitSpeed();
-
-        //if (isGrounded)
-        //{
-        //    rb.AddForce(transform.forward * moveInput * accelerationForce * Time.fixedDeltaTime, ForceMode.Acceleration);
-        //}
-
-        //float turn = turnInput * turnSpeed * Time.fixedDeltaTime;
-
-        //// NEW TURNING
-        //Vector3 targetVelocity = new Vector3(0, turnInput * turnSpeed, 0);
-        //rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, targetVelocity, Time.fixedDeltaTime * turnSmoothing);
-
-        //// OLD TURNING
-        ////rb.AddTorque(transform.up * turn, ForceMode.Acceleration);
     }
 
     void ApplyMovement()
