@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public enum GameState
 {
@@ -23,6 +24,23 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    #region Static Instance
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // Persist the manager across scenes (if necessary)
+        }
+        else
+        {
+            Destroy(gameObject);            // Makes sure only one GameManager exists at all times
+        }
+    }
+    #endregion
+
     #region Public and Serialized Variables
     // Public properties to read the private variables
     public GameState CurrentGameState { get { return currentGameState; } }
