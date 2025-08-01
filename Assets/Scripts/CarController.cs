@@ -6,6 +6,7 @@
  * Controls the car
 /=========================================================================*/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,33 +31,53 @@ public class CarController : MonoBehaviour
     public float groundCheckDistance = 1.1f;    // Distance for the raycast to detect ground
     public LayerMask groundLayer;               // Layer(s) that are considered ground
 
-    [Header("BoostPad Settings")]
-    private float originalMaxSpeed;
-    private float originalAccelerationForce;
-    private float currentBoostTimer;
-    private bool isBoosting = false;
+    [Header("Health Settings")]
+    public int maxHealth = 100;                 // The maximum health of the player's car
+    public Action<int> OnHealthChanged;         // Event to notify UI or other systems of health changes
     #endregion
 
-    #region Privtae Variables
+    #region Private Variables
     private Rigidbody rb;
     private float moveInput;
     private float turnInput;
     private float currentSpeed;
     private bool isGrounded;
+
+    // Boost pad settings
+    private float originalMaxSpeed;
+    private float originalAccelerationForce;
+    private float currentBoostTimer;
+    private bool isBoosting = false;
+
+    // Health settings
+    private int currentHealth;
     #endregion
 
     #region Functions
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         originalMaxSpeed = maxSpeed;
         originalAccelerationForce = accelerationForce;
     }
 
+    void Start()
+    {
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth); // Notify listeners of the initial health
+    }
+
     // Update is called once per frame
     void Update()
     {
-        moveInput = Input.GetAxis("Vertical");
+        if (GameManager.Instance.CurrentGameState == GameState.PLAYING)
+        {
+            moveInput = 1;
+        }
+        else
+        {
+            moveInput = 0;
+        }
         turnInput = Input.GetAxis("Horizontal");
 
         CheckIfGrounded();
@@ -168,6 +189,36 @@ public class CarController : MonoBehaviour
         maxSpeed = originalMaxSpeed;
         accelerationForce = originalAccelerationForce;
         Debug.Log("Boost Ended. Restored Max Speed: " + maxSpeed + ", Restored Acceleration: " + accelerationForce);
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        if (currentHealth <= 0) return; // Prevent taking damage after dying
+
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Max(0, currentHealth);    // Clamp health to a minimum of 0
+        Debug.Log("Player took " + damageAmount + " damage. Current Health: " + currentHealth);
+
+        // Notify listeners of the health changes
+        OnHealthChanged?.Invoke(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player had died!");
+
+        // Notify the GameManager that death has occurred
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddDeath();
+        }
+
+        // TODO: Implement death logic (respawn, etc)
     }
     #endregion
 }
