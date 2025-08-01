@@ -29,6 +29,12 @@ public class CarController : MonoBehaviour
     [Header("Ground Check Settings")]
     public float groundCheckDistance = 1.1f;    // Distance for the raycast to detect ground
     public LayerMask groundLayer;               // Layer(s) that are considered ground
+
+    [Header("BoostPad Settings")]
+    private float originalMaxSpeed;
+    private float originalAccelerationForce;
+    private float currentBoostTimer;
+    private bool isBoosting = false;
     #endregion
 
     #region Privtae Variables
@@ -43,6 +49,8 @@ public class CarController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        originalMaxSpeed = maxSpeed;
+        originalAccelerationForce = accelerationForce;
     }
 
     // Update is called once per frame
@@ -52,6 +60,16 @@ public class CarController : MonoBehaviour
         turnInput = Input.GetAxis("Horizontal");
 
         CheckIfGrounded();
+
+        // Handle boost timer
+        if (isBoosting)
+        {
+            currentBoostTimer -= Time.deltaTime;
+            if (currentBoostTimer <= 0)
+            {
+                EndBoost();
+            }
+        }
     }
 
     void FixedUpdate()
@@ -124,6 +142,32 @@ public class CarController : MonoBehaviour
     void CheckIfGrounded()
     {
         isGrounded = Physics.SphereCast(transform.position, 0.5f, -transform.up, out RaycastHit hit, groundCheckDistance, groundLayer);
+    }
+
+    public void ApplyBoost(float multiplier, float duration)
+    {
+        // If already boosting, reset the timer to extend the boost
+        if (isBoosting)
+        {
+            currentBoostTimer = duration;
+            return;
+        }
+
+        isBoosting = true;
+        currentBoostTimer = duration;
+
+        // Apply boost to to max speed and acceleration force
+        maxSpeed = originalMaxSpeed * multiplier;
+        accelerationForce = originalAccelerationForce * multiplier;
+        Debug.Log("Boost Activated! New Max Speed: " + maxSpeed + ", New Acceleration: " + accelerationForce);
+    }
+
+    public void EndBoost()
+    {
+        isBoosting = false;
+        maxSpeed = originalMaxSpeed;
+        accelerationForce = originalAccelerationForce;
+        Debug.Log("Boost Ended. Restored Max Speed: " + maxSpeed + ", Restored Acceleration: " + accelerationForce);
     }
     #endregion
 }
