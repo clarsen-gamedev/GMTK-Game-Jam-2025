@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3330278340979495930
 BoxCollider:
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 10
   respawnDelay: 5
-  pickupEffect: {fileID: 0}
+  pickupEffect: {fileID: 44906436323477066, guid: 8ba94d2cd84df4a42b73b605039a6e72, type: 3}
 --- !u!212 &1947998890032890666
 SpriteRenderer:
   m_ObjectHideFlags: 0

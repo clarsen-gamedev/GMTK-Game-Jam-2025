@@ -285,7 +285,10 @@ public class CarController : MonoBehaviour
         if (currentHealth <= 0) return; // Prevent healing damage after dying
 
         currentHealth += healAmount;
-        currentHealth = Mathf.Max(currentHealth, maxHealth);    // Clamp health to a maximum of maxHealth
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
         Debug.Log("Player healed " + healAmount + " damage. Current Health: " + currentHealth);
 
         // Notify listeners of the health changes
