@@ -301,6 +301,7 @@ public class CarController : MonoBehaviour
         carModel.SetActive(false);
 
         GameManager.Instance.GameStateSwitch(GameState.RESPAWNING);
+        GameManager.Instance.HandleMusic(false);
 
         StartCoroutine(WaitForExplosion(1f));
     }

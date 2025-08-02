@@ -86,6 +86,21 @@ public class GameManager : MonoBehaviour
     public float gateOpenDuration = 3.0f;
     #endregion
 
+    // Game Sounds & Music
+    [Header("Game Music")]
+    public AudioClip backgroundMusic;
+    public AudioSource musicSource;
+
+    [Header("Game Sounds")]
+    public AudioClip explosion;
+    public AudioClip carDriving;
+    public AudioClip crateBreak;
+    public AudioClip gateOpen;
+    public AudioClip boostPad;
+    public AudioClip pickupSound;
+    public AudioClip wallBump;
+    public AudioClip loopComplete;
+
     #region Private Variables
     private GameState currentGameState;
     private UIScreen currentScreen;
@@ -232,6 +247,7 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.READY)
         {
             currentGameState = GameState.PLAYING;
+            HandleMusic(true);
             Debug.Log("Game Started!");
 
             // Invoke the event to notify any listeners
@@ -326,6 +342,22 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = state;
     }
+
+    public void HandleMusic(bool isPlaying)
+    {
+        if (musicSource == null || backgroundMusic == null) return;
+
+        if (isPlaying && !musicSource.isPlaying)
+        {
+            musicSource.clip = backgroundMusic;
+            musicSource.loop = true;
+            musicSource.Play();
+        }
+        else if (!isPlaying && musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
+    }
     #endregion
 
     #region Coroutines
@@ -342,6 +374,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Respawn countdown starting...");
         yield return new WaitForSeconds(duration);
         currentGameState = GameState.PLAYING;
+        HandleMusic(true);
     }
 
     public IEnumerator OpenGate(int gateIndex)
@@ -355,6 +388,7 @@ public class GameManager : MonoBehaviour
         currentGateIndex++;
         UpdateCratesBrokenUI();
         currentGameState = GameState.PLAYING;
+        HandleMusic(true);
     }
     #endregion
 }

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2143676848277119149
 MonoBehaviour:
@@ -44,3 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5129522cb3d1e5e43a748634d5ad791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameUI: {fileID: 0}
+  pauseUI: {fileID: 0}
+  timerText: {fileID: 0}
+  loopsText: {fileID: 0}
+  deathsText: {fileID: 0}
+  cratesBrokenText: {fileID: 0}
+  healthSlider: {fileID: 0}
+  cratesRequiredForGate: 050000000a0000000f000000
+  gateOpenDuration: 3
+  backgroundMusic: {fileID: 8300000, guid: c34ecdfa6bfe9c342b247d90004820f1, type: 3}
+  explosion: {fileID: 8300000, guid: 93db50c781901be41b683cdb10c93db1, type: 3}
+  carDriving: {fileID: 0}
+  crateBreak: {fileID: 0}
+  gateOpen: {fileID: 0}
+  boostPad: {fileID: 0}
+  pickupSound: {fileID: 0}
+  wallBump: {fileID: 0}
+  loopComplete: {fileID: 0}

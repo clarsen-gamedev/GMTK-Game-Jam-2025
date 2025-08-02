@@ -21,6 +21,7 @@ public class Hazard : MonoBehaviour
     #endregion
 
     #region Private Variables
+    private AudioSource explosionSound;
     private Transform mainCameraTransform;
     private SpriteRenderer hazardRenderer;
     private Collider hazardCollider;
@@ -32,6 +33,7 @@ public class Hazard : MonoBehaviour
     void Awake()
     {
         // Cache the components and initial transform values on awake
+        explosionSound = GetComponent<AudioSource>();
         hazardRenderer = GetComponent<SpriteRenderer>();
         hazardCollider = GetComponent<Collider>();
         initialPosition = transform.position;
@@ -84,6 +86,8 @@ public class Hazard : MonoBehaviour
     {
         if (explosionPrefab != null)
         {
+            explosionSound.clip = GameManager.Instance.explosion;
+            explosionSound.Play();
             Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
 
