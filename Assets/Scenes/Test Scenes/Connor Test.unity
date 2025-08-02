@@ -486,6 +486,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &945757104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2050391759571033553, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+  m_PrefabInstance: {fileID: 7772103929634618092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1050400706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1314,6 +1325,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1391929532}
+    - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
+      propertyPath: gateOpenedText
+      value: 
+      objectReference: {fileID: 945757104}
     - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
       propertyPath: cratesBrokenText
       value: 
