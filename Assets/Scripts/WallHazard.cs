@@ -1,7 +1,7 @@
 /*=========================================================================/
- * Name: Hazard.cs
+ * Name: WallHazard.cs
  * Author: Connor Larsen
- * Date: 07/31/2025
+ * Date: 08/01/2025
  * 
  * Place this script on a wall object with a Collider. The player will take
  * damage when hit by this object. Works similarly to Hazard.cs, except

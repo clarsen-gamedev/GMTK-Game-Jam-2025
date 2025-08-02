@@ -218,6 +218,7 @@ public class CarController : MonoBehaviour
         // Placeholder respawn logic
         transform.position = new Vector3(100, 1, 0);
         transform.rotation = Quaternion.identity;
+
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -273,11 +274,11 @@ public class CarController : MonoBehaviour
         // Take damage from the hazard
         TakeDamage(damage);
 
-        // Apply bounceback force
-        rb.AddForce(bounceDirection.normalized * bounceForce, ForceMode.Impulse);
+        //// Apply bounceback force
+        //rb.AddForce(bounceDirection.normalized * bounceForce, ForceMode.Impulse);
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log("Player had died!");
 
@@ -287,7 +288,10 @@ public class CarController : MonoBehaviour
             GameManager.Instance.AddDeath();
         }
 
-        // TODO: Implement death logic (respawn, etc)
+        currentHealth = maxHealth;
+        GameManager.Instance.UpdateHealthUI(currentHealth);
+        Respawn();
+        GameManager.Instance.StartCoroutine(GameManager.Instance.StartRespawn(1.5f));
     }
     #endregion
 }

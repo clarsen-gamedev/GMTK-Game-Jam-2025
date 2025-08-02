@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Runtime.CompilerServices;
@@ -17,8 +18,16 @@ public enum GameState
 {
     READY,      // Before game has started (show countdown?)
     PLAYING,    // The game is actively being played
+    RESPAWNING, // The player has died and needs to respawn
     PAUSED,     // The game is paused
     GAMEOVER,   // The game has ended
+    NONE
+}
+
+public enum UIScreen
+{
+    GAME,
+    PAUSE,
     NONE
 }
 
@@ -44,6 +53,7 @@ public class GameManager : MonoBehaviour
     #region Public and Serialized Variables
     // Public properties to read the private variables
     public GameState CurrentGameState { get { return currentGameState; } }
+    public UIScreen CurrentScreen { get { return currentScreen; } }
     public float ElapsedTime { get { return elapsedTime; } }
     public int LoopsCompleted { get { return loopsCompleted; } }
     public int Deaths {  get { return deaths; } }
@@ -55,14 +65,21 @@ public class GameManager : MonoBehaviour
     public Action OnGameOver;
 
     // UI References
+    [Header("UI Panels")]
+    public GameObject gameUI;
+    public GameObject pauseUI;
+
     [Header("UI Elements")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI loopsText;
     public TextMeshProUGUI deathsText;
+    public Slider healthSlider;
     #endregion
 
     #region Private Variables
     private GameState currentGameState;
+    private UIScreen currentScreen;
+    private bool isPaused = false;
     private float elapsedTime = 0f;
     private int loopsCompleted = 0;
     private int deaths = 0;
@@ -75,8 +92,36 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.READY;
         Debug.Log("GameManager initialized. State: " + currentGameState);
 
+        // Enable the game UI on startup
+        currentScreen = UIScreen.GAME;
+        UISwitch(UIScreen.GAME);
+
+        SetupUI();
+
         // Start countdown coroutine
         StartCoroutine(StartCountdown(3));
+    }
+
+    void SetupUI()
+    {
+        CarController carController = FindObjectOfType<CarController>();
+        if (carController != null )
+        {
+            if (healthSlider != null)
+            {
+                healthSlider.maxValue = carController.maxHealth;
+            }
+
+            carController.OnHealthChanged += UpdateHealthUI;
+        }
+    }
+
+    public void UpdateHealthUI(int currentHealth)
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth;
+        }
     }
 
     void Update()
@@ -87,7 +132,59 @@ public class GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             UpdateUI();
         }
+
+        #region Controls
+        // Press ESC = Pause Game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Only function if in the GAME or PAUSE screen
+            if (currentScreen == UIScreen.GAME || currentScreen == UIScreen.PAUSE)
+            {
+                // If game is paused, resume game
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                // If game is active, pause game
+                else
+                {
+                    PauseGame();
+                }
+            }
+        }
+        #endregion
     }
+
+    #region Menu Functions
+    public void ResumeGame()
+    {
+        // Switch to the game screen
+        UISwitch(UIScreen.GAME);
+
+        // Resume game time
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    public void PauseGame()
+    {
+        // Switch to the pause screen
+        UISwitch(UIScreen.PAUSE);
+
+        // Unlock the cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Pause game time
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    #endregion
 
     public void StartGame()
     {
@@ -160,6 +257,29 @@ public class GameManager : MonoBehaviour
             deathsText.text = "Deaths: " + deaths.ToString();
         }
     }
+
+    void UISwitch(UIScreen screen)
+    {
+        // Game UI
+        if (screen == UIScreen.GAME)
+        {
+            // Disable all other screens
+            pauseUI.SetActive(false);
+
+            // Enable only the game screen
+            gameUI.SetActive(true);
+        }
+
+        // Pause UI
+        else if (screen == UIScreen.PAUSE)
+        {
+            // Disable all other screens
+            gameUI.SetActive(false);
+
+            // Enable only the pause screen
+            pauseUI.SetActive(true);
+        }
+    }
     #endregion
 
     #region Coroutines
@@ -168,6 +288,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Countdown starting...");
         yield return new WaitForSeconds(duration);
         StartGame();
+    }
+
+    public IEnumerator StartRespawn(float duration)
+    {
+        currentGameState = GameState.RESPAWNING;
+        Debug.Log("Respawn countdown starting...");
+        yield return new WaitForSeconds(duration);
+        currentGameState = GameState.PLAYING;
     }
     #endregion
 }
