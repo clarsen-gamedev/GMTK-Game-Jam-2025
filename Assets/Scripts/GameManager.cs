@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
     public Action<int> OnGateOpened;
     public Action<int> OnCrateBroken;
 
+    // The Car
+    public CarController playerCar;
+
     // UI References
     [Header("UI Panels")]
     public GameObject gameUI;
@@ -100,6 +103,8 @@ public class GameManager : MonoBehaviour
     public AudioClip pickupSound;
     public AudioClip wallBump;
     public AudioClip loopComplete;
+    public AudioClip countdown;
+    public AudioClip goBeep;
 
     #region Private Variables
     private GameState currentGameState;
@@ -247,7 +252,12 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.READY)
         {
             currentGameState = GameState.PLAYING;
+            
             HandleMusic(true);
+            playerCar.engineSource.clip = GameManager.Instance.carDriving;
+            playerCar.engineSource.loop = true;
+            playerCar.engineSource.Play();
+
             Debug.Log("Game Started!");
 
             // Invoke the event to notify any listeners
@@ -364,8 +374,37 @@ public class GameManager : MonoBehaviour
     IEnumerator StartCountdown(float duration)
     {
         Debug.Log("Countdown starting...");
-        yield return new WaitForSeconds(duration);
+
+        gateOpenedText.text = "3";
+        gateOpenedText.gameObject.SetActive(true);
+        musicSource.clip = countdown;
+        musicSource.loop = false;
+        musicSource.Play();
+
+        yield return new WaitForSeconds(duration / 3);
+
+        gateOpenedText.text = "2";
+        musicSource.clip = countdown;
+        musicSource.loop = false;
+        musicSource.Play();
+
+        yield return new WaitForSeconds(duration / 3);
+
+        gateOpenedText.text = "1";
+        musicSource.clip = countdown;
+        musicSource.loop = false;
+        musicSource.Play();
+
+        yield return new WaitForSeconds(duration / 3);
+
+        gateOpenedText.text = "GO!";
+        musicSource.clip = goBeep;
+        musicSource.loop = false;
+        musicSource.Play();
         StartGame();
+
+        yield return new WaitForSeconds(1f);
+        gateOpenedText.gameObject.SetActive(false);
     }
 
     public IEnumerator StartRespawn(float duration)
@@ -374,7 +413,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Respawn countdown starting...");
         yield return new WaitForSeconds(duration);
         currentGameState = GameState.PLAYING;
+
         HandleMusic(true);
+        playerCar.engineSource.clip = GameManager.Instance.carDriving;
+        playerCar.engineSource.loop = true;
+        playerCar.engineSource.Play();
     }
 
     public IEnumerator OpenGate(int gateIndex)

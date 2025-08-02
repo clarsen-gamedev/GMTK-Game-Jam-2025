@@ -303,9 +303,6 @@ public class CarController : MonoBehaviour
         // Play impact sound
         impactSource.clip = GameManager.Instance.wallBump;
         impactSource.Play();
-
-        //// Apply bounceback force
-        //rb.AddForce(bounceDirection.normalized * bounceForce, ForceMode.Impulse);
     }
 
     public void Die()
@@ -317,6 +314,7 @@ public class CarController : MonoBehaviour
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             engineSource.clip = GameManager.Instance.explosion;
+            engineSource.loop = false;
             engineSource.Play();
         }
 

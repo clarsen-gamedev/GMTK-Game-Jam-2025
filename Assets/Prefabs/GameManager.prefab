@@ -44,22 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5129522cb3d1e5e43a748634d5ad791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCar: {fileID: 0}
   gameUI: {fileID: 0}
   pauseUI: {fileID: 0}
   timerText: {fileID: 0}
   loopsText: {fileID: 0}
   deathsText: {fileID: 0}
   cratesBrokenText: {fileID: 0}
+  gateOpenedText: {fileID: 0}
   healthSlider: {fileID: 0}
   cratesRequiredForGate: 050000000a0000000f000000
   gateOpenDuration: 3
   backgroundMusic: {fileID: 8300000, guid: c34ecdfa6bfe9c342b247d90004820f1, type: 3}
   musicSource: {fileID: 0}
   explosion: {fileID: 8300000, guid: 0a002f010c128fb45a665bab338acfb8, type: 3}
-  carDriving: {fileID: 0}
+  carDriving: {fileID: 8300000, guid: 8e3757ad56c02c644b33d8745954bec0, type: 3}
   crateBreak: {fileID: 0}
   gateOpen: {fileID: 0}
   boostPad: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: 32f4a266ebe32f64cbe4490e4849809d, type: 3}
   wallBump: {fileID: 8300000, guid: 8e7918121c3a56c4c9ed63b68f765d87, type: 3}
   loopComplete: {fileID: 0}
+  countdown: {fileID: 8300000, guid: 45c19ff37449d1048a9fdaaaff1026d1, type: 3}
+  goBeep: {fileID: 0}

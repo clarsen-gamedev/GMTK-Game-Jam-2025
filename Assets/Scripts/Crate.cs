@@ -53,14 +53,11 @@ public class Crate : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        CarController car = collision.gameObject.GetComponent<CarController>();
+        CarController car = other.gameObject.GetComponent<CarController>();
         if (car != null)
         {
-            // Calculate the bounce-back direction
-            Vector3 bounceDirection = collision.contacts[0].normal;
-
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.AddBrokenCrate();
