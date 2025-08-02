@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     {
         if (cratesBrokenText != null && cratesRequiredForGate.Length > currentGateIndex)
         {
-            cratesBrokenText.text = "Crates: " + CratesBroken + "/" + cratesRequiredForGate;
+            cratesBrokenText.text = "Crates: " + CratesBroken + "/" + cratesRequiredForGate[currentGateIndex];
         }
         else if (cratesBrokenText != null)
         {

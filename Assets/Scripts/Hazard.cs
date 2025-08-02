@@ -16,15 +16,28 @@ public class Hazard : MonoBehaviour
     #region Public and Serialized Variables
     [Header("Hazard Settings")]
     public int damageAmount = 10;                   // The amount of damage this hazard will deal to the car
-    public GameObject billboardSprite;              // The visual sprite that will always face the camera
+    public float respawnDelay = 5.0f;               // The time in seconds before the hazard respawns
     public GameObject explosionPrefab;              // Public reference to the explosion animation prefab
     #endregion
 
     #region Private Variables
     private Transform mainCameraTransform;
+    private SpriteRenderer hazardRenderer;
+    private Collider hazardCollider;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
     #endregion
 
     #region Functions
+    void Awake()
+    {
+        // Cache the components and initial transform values on awake
+        hazardRenderer = GetComponent<SpriteRenderer>();
+        hazardCollider = GetComponent<Collider>();
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+
     void Start()
     {
         // Find the main camera
@@ -61,25 +74,64 @@ public class Hazard : MonoBehaviour
         CarController car = collision.gameObject.GetComponent<CarController>();
         if (car != null)
         {
-            // Calculate the bounce-back direction
-            Vector3 bounceDirection = collision.contacts[0].normal;
-
-            // Take damage
-            car.OnHazardImpact(damageAmount, bounceDirection);
-
-            DestroyHazard();
+            car.OnHazardImpact(10, collision.contacts[0].normal);
         }
+
+        StartRespawnTimer();
     }
 
-    void DestroyHazard()
+    void StartRespawnTimer()
     {
-        // Play explosion prefab
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
-        // Destroy this GameObject
-        Destroy(gameObject);
+
+        if (hazardRenderer != null)
+        {
+            hazardRenderer.enabled = false;
+        }
+        if (hazardCollider != null)
+        {
+            hazardCollider.enabled = false;
+        }
+
+        StartCoroutine(RespawnCoroutine());
+    }
+
+    //void DestroyHazard()
+    //{
+    //    // Play explosion prefab
+    //    if (explosionPrefab != null)
+    //    {
+    //        Instantiate(explosionPrefab, transform.position, transform.rotation);
+    //    }
+    //    // Destroy this GameObject
+    //    Destroy(gameObject);
+    //}
+    #endregion
+
+    #region Coroutines
+    IEnumerator RespawnCoroutine()
+    {
+        // Wait for the specified respawn delay
+        yield return new WaitForSeconds(respawnDelay);
+
+        // Reset the hazard's position and rotation
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+
+        // Re-enable the hazard's renderer and collider
+        if (hazardRenderer != null)
+        {
+            hazardRenderer.enabled = true;
+        }
+        if (hazardCollider != null)
+        {
+            hazardCollider.enabled = true;
+        }
+
+        Debug.Log(gameObject.name + " has respawned.");
     }
     #endregion
 }
