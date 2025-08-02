@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
 
     public void AddDeath()
     {
-        if (currentGameState == GameState.PLAYING)
+        if (currentGameState == GameState.RESPAWNING)
         {
             deaths++;
             Debug.Log("Player Died. Total deaths: " + deaths);

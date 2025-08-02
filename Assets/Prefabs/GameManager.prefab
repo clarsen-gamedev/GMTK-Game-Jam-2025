@@ -54,11 +54,12 @@ MonoBehaviour:
   cratesRequiredForGate: 050000000a0000000f000000
   gateOpenDuration: 3
   backgroundMusic: {fileID: 8300000, guid: c34ecdfa6bfe9c342b247d90004820f1, type: 3}
-  explosion: {fileID: 8300000, guid: 93db50c781901be41b683cdb10c93db1, type: 3}
+  musicSource: {fileID: 0}
+  explosion: {fileID: 8300000, guid: 0a002f010c128fb45a665bab338acfb8, type: 3}
   carDriving: {fileID: 0}
   crateBreak: {fileID: 0}
   gateOpen: {fileID: 0}
   boostPad: {fileID: 0}
-  pickupSound: {fileID: 0}
-  wallBump: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: 32f4a266ebe32f64cbe4490e4849809d, type: 3}
+  wallBump: {fileID: 8300000, guid: 8e7918121c3a56c4c9ed63b68f765d87, type: 3}
   loopComplete: {fileID: 0}

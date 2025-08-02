@@ -45,6 +45,10 @@ public class CarController : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth = 100;                 // The maximum health of the player's car
     public Action<int> OnHealthChanged;         // Event to notify UI or other systems of health changes
+
+    [Header("Audio Settings")]
+    public AudioSource engineSource;
+    public AudioSource impactSource;
     #endregion
 
     #region Private Variables
@@ -219,8 +223,6 @@ public class CarController : MonoBehaviour
 
     void Respawn()
     {
-        // TODO: Implement respawn logic
-
         // Re-enable the car model
         carModel.SetActive(true);
 
@@ -283,6 +285,10 @@ public class CarController : MonoBehaviour
         // Take damage from the hazard
         TakeDamage(damage);
 
+        // Play impact sound
+        impactSource.clip = GameManager.Instance.wallBump;
+        impactSource.Play();
+
         //// Apply bounceback force
         //rb.AddForce(bounceDirection.normalized * bounceForce, ForceMode.Impulse);
     }
@@ -295,6 +301,8 @@ public class CarController : MonoBehaviour
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            engineSource.clip = GameManager.Instance.explosion;
+            engineSource.Play();
         }
 
         // Hide the car while the explosion animation plays
