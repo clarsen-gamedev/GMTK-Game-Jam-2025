@@ -17,6 +17,7 @@ public class CarController : MonoBehaviour
     [Header("Car Settings")]
     public float accelerationForce = 3000f;     // The forward acceleration force
     public float maxSpeed = 30f;                // Maximum forward speed
+    public Transform spawnPosition;             // The transform for the car's starting position
 
     [Header("Turning Settings")]
     public float turnSpeed = 3f;                // Base turning force
@@ -106,15 +107,18 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.drag = isGrounded ? groundDrag : airDrag;    // Apply drag based on wehther the car is grounded
+        if (GameManager.Instance.CurrentGameState == GameState.PLAYING)
+        {
+            rb.drag = isGrounded ? groundDrag : airDrag;    // Apply drag based on wehther the car is grounded
 
-        currentSpeed = rb.velocity.magnitude;   // Grab the current speed
+            currentSpeed = rb.velocity.magnitude;   // Grab the current speed
 
-        ApplyMovement();
-        ApplyTurning();
-        LimitSpeed();
-        CorrectCarOrientation();
-        CheckForStuck();
+            ApplyMovement();
+            ApplyTurning();
+            LimitSpeed();
+            CorrectCarOrientation();
+            CheckForStuck();
+        }
     }
 
     void ApplyMovement()
@@ -207,7 +211,7 @@ public class CarController : MonoBehaviour
         if (stuckTimer >= stuckTime)
         {
             Debug.Log("Car is stuck! Forcing a respawn");
-            Respawn();
+            Die();
         }
     }
 
@@ -216,7 +220,7 @@ public class CarController : MonoBehaviour
         // TODO: Implement respawn logic
 
         // Placeholder respawn logic
-        transform.position = new Vector3(100, 1, 0);
+        transform.position = spawnPosition.position;
         transform.rotation = Quaternion.identity;
 
         rb.velocity = Vector3.zero;

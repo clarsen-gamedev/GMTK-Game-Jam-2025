@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
             }
 
             carController.OnHealthChanged += UpdateHealthUI;
+            UpdateHealthUI(carController.maxHealth);
         }
     }
 
@@ -127,7 +128,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // The timer only runs when the game is in the 'Playing' state
-        if (currentGameState == GameState.PLAYING)
+        if (currentGameState == GameState.PLAYING || currentGameState == GameState.RESPAWNING)
         {
             elapsedTime += Time.deltaTime;
             UpdateUI();
