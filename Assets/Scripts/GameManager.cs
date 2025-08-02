@@ -19,7 +19,6 @@ public enum GameState
     READY,          // Before game has started (show countdown?)
     PLAYING,        // The game is actively being played
     RESPAWNING,     // The player has died and needs to respawn
-    GATEOPENING,    // The player has opened a gate and cannot move
     PAUSED,         // The game is paused
     GAMEOVER,       // The game has ended
     NONE
@@ -78,6 +77,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI loopsText;
     public TextMeshProUGUI deathsText;
     public TextMeshProUGUI cratesBrokenText;
+    public TextMeshProUGUI gateOpenedText;
     public Slider healthSlider;
 
     // Gate Logic Settings
@@ -379,16 +379,16 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenGate(int gateIndex)
     {
-        currentGameState = GameState.GATEOPENING;
         OnGateOpened?.Invoke(currentGateIndex);
+        gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
+        gateOpenedText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(gateOpenDuration);
 
+        gateOpenedText.gameObject.SetActive(false);
         currentCratesBroken = 0;
         currentGateIndex++;
         UpdateCratesBrokenUI();
-        currentGameState = GameState.PLAYING;
-        HandleMusic(true);
     }
     #endregion
 }
