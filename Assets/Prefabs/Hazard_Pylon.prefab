@@ -98,6 +98,7 @@ MonoBehaviour:
   damageAmount: 10
   billboardSprite: {fileID: 8502733872890033055}
   destructionParticles: {fileID: 0}
+  explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}
 --- !u!1 &8502733872890033055
 GameObject:
   m_ObjectHideFlags: 0

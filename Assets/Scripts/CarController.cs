@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
     public float accelerationForce = 3000f;     // The forward acceleration force
     public float maxSpeed = 30f;                // Maximum forward speed
     public Transform spawnPosition;             // The transform for the car's starting position
+    public GameObject carModel;                 // Public reference to the car model, to disappear when dead
 
     [Header("Turning Settings")]
     public float turnSpeed = 3f;                // Base turning force
@@ -30,6 +31,7 @@ public class CarController : MonoBehaviour
 
     [Header("Hazard Settings")]
     public float bounceForce = 50f;             // The force applied to the car on impact with a hazard
+    public GameObject explosionPrefab;          // Public reference to the explosion animation prefab
 
     [Header("Stuck/Correction Settings")]
     public float uprightCorrectionSpeed = 5f;   // How fast the car corrects its upright orientation
@@ -219,6 +221,9 @@ public class CarController : MonoBehaviour
     {
         // TODO: Implement respawn logic
 
+        // Re-enable the car model
+        carModel.SetActive(true);
+
         // Placeholder respawn logic
         transform.position = spawnPosition.position;
         transform.rotation = Quaternion.identity;
@@ -286,12 +291,26 @@ public class CarController : MonoBehaviour
     {
         Debug.Log("Player had died!");
 
-        // Notify the GameManager that death has occurred
-        if (GameManager.Instance != null)
+        // Instantiate the explosion effect
+        if (explosionPrefab != null)
         {
-            GameManager.Instance.AddDeath();
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
 
+        // Hide the car while the explosion animation plays
+        carModel.SetActive(false);
+
+        GameManager.Instance.GameStateSwitch(GameState.RESPAWNING);
+
+        StartCoroutine(WaitForExplosion(1f));
+    }
+    #endregion
+
+    #region Coroutines
+    IEnumerator WaitForExplosion(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        GameManager.Instance.AddDeath();
         currentHealth = maxHealth;
         GameManager.Instance.UpdateHealthUI(currentHealth);
         Respawn();

@@ -17,7 +17,7 @@ public class Hazard : MonoBehaviour
     [Header("Hazard Settings")]
     public int damageAmount = 10;                   // The amount of damage this hazard will deal to the car
     public GameObject billboardSprite;              // The visual sprite that will always face the camera
-    public ParticleSystem destructionParticles;     // The particle system to play when this hazard is destroyed
+    public GameObject explosionPrefab;              // Public reference to the explosion animation prefab
     #endregion
 
     #region Private Variables
@@ -73,17 +73,11 @@ public class Hazard : MonoBehaviour
 
     void DestroyHazard()
     {
-        // Play destruction particle effects if assigned
-        if (destructionParticles != null)
+        // Play explosion prefab
+        if (explosionPrefab != null)
         {
-            // Instantiate particles at the hazard's position and play them
-            ParticleSystem particles = Instantiate(destructionParticles, transform.position, Quaternion.identity);
-            particles.Play();
-
-            // Destroy the particle effect after its duration
-            Destroy(particles.gameObject, particles.main.duration);
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
-
         // Destroy this GameObject
         Destroy(gameObject);
     }

@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 3016801541198544666}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6966161936389429804
 BoxCollider:
@@ -182,3 +182,4 @@ MonoBehaviour:
   damageAmount: 10
   billboardSprite: {fileID: 318877534849100451}
   destructionParticles: {fileID: 0}
+  explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}

@@ -281,6 +281,11 @@ public class GameManager : MonoBehaviour
             pauseUI.SetActive(true);
         }
     }
+
+    public void GameStateSwitch(GameState state)
+    {
+        currentGameState = state;
+    }
     #endregion
 
     #region Coroutines

@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5340553206190525832}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7828043976621499848
 BoxCollider:
@@ -97,12 +97,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationForce: 3000
   maxSpeed: 30
+  spawnPosition: {fileID: 0}
+  carModel: {fileID: 4708131282574317362}
   turnSpeed: 3
   turnSmoothing: 15
   turnSpeedAtMaxSpeed: 1.5
   groundDrag: 2
   airDrag: 0.1
   bounceForce: 50
+  explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}
   uprightCorrectionSpeed: 5
   uprightTiltAngle: 45
   stuckTime: 1.5
@@ -176,6 +179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6f7a92d4defb204f889d4dc26023fff, type: 3}
+--- !u!1 &4708131282574317362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e6f7a92d4defb204f889d4dc26023fff, type: 3}
+  m_PrefabInstance: {fileID: 5591163571119729251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5340553206190525832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6f7a92d4defb204f889d4dc26023fff, type: 3}
