@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 6a292884782d75f4e9f3bc989fc0a4ea
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - V5 Prophit
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 963b0b10a8d47994ea1fe3bcb92acb42, type: 3}
+  - {fileID: 12800000, guid: 40f8412e248dde64c972ab346915213c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
