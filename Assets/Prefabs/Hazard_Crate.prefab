@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3016801541198544666}
   - component: {fileID: 1213801237190021789}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6966161936389429804}
   - component: {fileID: 5328858949577441332}
   - component: {fileID: 8932271202684580364}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hazard_Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,5 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   billboardSprite: {fileID: 318877534849100451}
-  destructionParticles: {fileID: 0}
   explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}

@@ -16,11 +16,12 @@ using System.Runtime.CompilerServices;
 
 public enum GameState
 {
-    READY,      // Before game has started (show countdown?)
-    PLAYING,    // The game is actively being played
-    RESPAWNING, // The player has died and needs to respawn
-    PAUSED,     // The game is paused
-    GAMEOVER,   // The game has ended
+    READY,          // Before game has started (show countdown?)
+    PLAYING,        // The game is actively being played
+    RESPAWNING,     // The player has died and needs to respawn
+    GATEOPENING,    // The player has opened a gate and cannot move
+    PAUSED,         // The game is paused
+    GAMEOVER,       // The game has ended
     NONE
 }
 
@@ -57,12 +58,15 @@ public class GameManager : MonoBehaviour
     public float ElapsedTime { get { return elapsedTime; } }
     public int LoopsCompleted { get { return loopsCompleted; } }
     public int Deaths {  get { return deaths; } }
+    public int CratesBroken { get { return currentCratesBroken; } }
 
     // Events to notify other scripts of changes
     public Action OnGameStart;
     public Action<int> OnLoopCompleted;
     public Action<int> OnDeath;
     public Action OnGameOver;
+    public Action<int> OnGateOpened;
+    public Action<int> OnCrateBroken;
 
     // UI References
     [Header("UI Panels")]
@@ -73,7 +77,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI loopsText;
     public TextMeshProUGUI deathsText;
+    public TextMeshProUGUI cratesBrokenText;
     public Slider healthSlider;
+
+    // Gate Logic Settings
+    [Header("Gate Logic")]
+    public int[] cratesRequiredForGate;
+    public float gateOpenDuration = 3.0f;
     #endregion
 
     #region Private Variables
@@ -83,6 +93,8 @@ public class GameManager : MonoBehaviour
     private float elapsedTime = 0f;
     private int loopsCompleted = 0;
     private int deaths = 0;
+    private int currentGateIndex = 0;
+    private int currentCratesBroken = 0;
     #endregion
 
     #region Functions
@@ -97,6 +109,7 @@ public class GameManager : MonoBehaviour
         UISwitch(UIScreen.GAME);
 
         SetupUI();
+        UpdateCratesBrokenUI();
 
         // Start countdown coroutine
         StartCoroutine(StartCountdown(3));
@@ -122,6 +135,33 @@ public class GameManager : MonoBehaviour
         if (healthSlider != null)
         {
             healthSlider.value = currentHealth;
+        }
+    }
+
+    void UpdateCratesBrokenUI()
+    {
+        if (cratesBrokenText != null && cratesRequiredForGate.Length > currentGateIndex)
+        {
+            cratesBrokenText.text = "Crates: " + CratesBroken + "/" + cratesRequiredForGate;
+        }
+        else if (cratesBrokenText != null)
+        {
+            cratesBrokenText.text = "Crates: " + CratesBroken + "/--";
+        }
+    }
+
+    public void AddBrokenCrate()
+    {
+        if (currentGameState != GameState.PLAYING) return;
+
+        currentCratesBroken++;
+        OnCrateBroken?.Invoke(currentCratesBroken);
+        UpdateCratesBrokenUI();
+
+        if (currentGateIndex < cratesRequiredForGate.Length && currentCratesBroken >= cratesRequiredForGate[currentGateIndex])
+        {
+            Debug.Log("Gate " + currentGateIndex + " opened.");
+            StartCoroutine(OpenGate(currentGateIndex));
         }
     }
 
@@ -301,6 +341,19 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.RESPAWNING;
         Debug.Log("Respawn countdown starting...");
         yield return new WaitForSeconds(duration);
+        currentGameState = GameState.PLAYING;
+    }
+
+    public IEnumerator OpenGate(int gateIndex)
+    {
+        currentGameState = GameState.GATEOPENING;
+        OnGateOpened?.Invoke(currentGateIndex);
+
+        yield return new WaitForSeconds(gateOpenDuration);
+
+        currentCratesBroken = 0;
+        currentGateIndex++;
+        UpdateCratesBrokenUI();
         currentGameState = GameState.PLAYING;
     }
     #endregion
