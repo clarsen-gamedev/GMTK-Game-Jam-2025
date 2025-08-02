@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6657786127427977999}
   - component: {fileID: 3330278340979495930}
   - component: {fileID: 9132193035671659068}
-  - component: {fileID: 4719193731207706214}
+  - component: {fileID: 4621112160031999025}
   - component: {fileID: 1947998890032890666}
   - component: {fileID: 3728485246812917739}
   m_Layer: 7
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3330278340979495930
 BoxCollider:
@@ -84,7 +84,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4719193731207706214
+--- !u!114 &4621112160031999025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6698029238232332233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 675f6e40570495043bb7b93df00b494b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4912841931582c04faac932dc48e9e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  healAmount: 10
   respawnDelay: 5
-  explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}
+  pickupEffect: {fileID: 0}
 --- !u!212 &1947998890032890666
 SpriteRenderer:
   m_ObjectHideFlags: 0

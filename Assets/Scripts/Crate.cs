@@ -14,7 +14,6 @@ public class Crate : MonoBehaviour
 {
     #region Public and Serialized Variables
     [Header("Hazard Settings")]
-    public GameObject billboardSprite;              // The visual sprite that will always face the camera
     public GameObject explosionPrefab;              // Public reference to the explosion animation prefab
     #endregion
 
