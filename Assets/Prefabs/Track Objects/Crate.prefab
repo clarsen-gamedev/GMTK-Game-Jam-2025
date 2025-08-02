@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5328858949577441332}
   - component: {fileID: 5768185184118440476}
   m_Layer: 8
-  m_Name: Goal_Crate
+  m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

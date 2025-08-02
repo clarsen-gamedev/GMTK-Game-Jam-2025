@@ -17,7 +17,6 @@ public class Hazard : MonoBehaviour
     [Header("Hazard Settings")]
     public int damageAmount = 10;                   // The amount of damage this hazard will deal to the car
     public float respawnDelay = 5.0f;               // The time in seconds before the hazard respawns
-    public GameObject billboardSprite;              // The visual sprite that will always face the camera
     public GameObject explosionPrefab;              // Public reference to the explosion animation prefab
     #endregion
 
