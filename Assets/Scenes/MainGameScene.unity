@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: abe1aa837866ea5489abe6243251673f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.534926, g: 0.48061568, b: 0.4492213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -218,19 +218,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.36
+      value: 248.3
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 80.5
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.3
+      value: 115.6
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.99092805
+      value: -0.8490973
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalRotation.x
@@ -238,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13439354
+      value: 0.5282365
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalRotation.z
@@ -250,16 +250,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 344.553
+      value: 296.227
       objectReference: {fileID: 0}
     - target: {fileID: 6759769366771584372, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6944305340416105899, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944305340416105899, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
+      propertyPath: turnSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944305340416105899, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: spawnPosition
       value: 
       objectReference: {fileID: 1732154522}
+    - target: {fileID: 6944305340416105899, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
+      propertyPath: accelerationForce
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944305340416105899, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
+      propertyPath: turnSpeedAtMaxSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7016821210953248680, guid: e4c4a861c5355bb4d9c6437a15333f50, type: 3}
       propertyPath: m_Name
       value: The Car
