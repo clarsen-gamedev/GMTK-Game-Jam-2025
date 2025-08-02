@@ -41,17 +41,17 @@ public class Hazard : MonoBehaviour
     void Update()
     {
         // Make the sprite always face the camera
-        if (mainCameraTransform != null && billboardSprite != null)
+        if (mainCameraTransform != null)
         {
             // Calculate the direction from the hazard to the camera
-            Vector3 directionToCamera = mainCameraTransform.position - billboardSprite.transform.position;
+            Vector3 directionToCamera = mainCameraTransform.position - transform.position;
             directionToCamera.y = 0;
 
             // Look in the direction of the camera
             if (directionToCamera != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(-directionToCamera);
-                billboardSprite.transform.rotation = targetRotation;
+                transform.rotation = targetRotation;
             }
         }
     }
@@ -61,7 +61,12 @@ public class Hazard : MonoBehaviour
         CarController car = collision.gameObject.GetComponent<CarController>();
         if (car != null)
         {
-            car.TakeDamage(damageAmount);
+            // Calculate the bounce-back direction
+            Vector3 bounceDirection = collision.contacts[0].normal;
+
+            // Take damage
+            car.OnHazardImpact(damageAmount, bounceDirection);
+
             DestroyHazard();
         }
     }

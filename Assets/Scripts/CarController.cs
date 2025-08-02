@@ -27,6 +27,14 @@ public class CarController : MonoBehaviour
     public float groundDrag = 2f;               // The amount of drag applied when the car is on the ground
     public float airDrag = 0.1f;                // The amount of drag applied when the car is in the air
 
+    [Header("Hazard Settings")]
+    public float bounceForce = 50f;             // The force applied to the car on impact with a hazard
+
+    [Header("Stuck/Correction Settings")]
+    public float uprightCorrectionSpeed = 5f;   // How fast the car corrects its upright orientation
+    public float uprightTiltAngle = 45f;        // The angle at which the car starts to auto-correct
+    public float stuckTime = 3f;                // Time in seconds before the car is considered stuck and respawns
+
     [Header("Ground Check Settings")]
     public float groundCheckDistance = 1.1f;    // Distance for the raycast to detect ground
     public LayerMask groundLayer;               // Layer(s) that are considered ground
@@ -51,6 +59,9 @@ public class CarController : MonoBehaviour
 
     // Health settings
     private int currentHealth;
+
+    // Stuck timer
+    private float stuckTimer = 0f;
     #endregion
 
     #region Functions
@@ -102,6 +113,8 @@ public class CarController : MonoBehaviour
         ApplyMovement();
         ApplyTurning();
         LimitSpeed();
+        CorrectCarOrientation();
+        CheckForStuck();
     }
 
     void ApplyMovement()
@@ -165,6 +178,53 @@ public class CarController : MonoBehaviour
         isGrounded = Physics.SphereCast(transform.position, 0.5f, -transform.up, out RaycastHit hit, groundCheckDistance, groundLayer);
     }
 
+    void CorrectCarOrientation()
+    {
+        // Calculate the angle between the car's "up" vector and the world's "up" vector
+        float tiltAngle = Vector3.Angle(transform.up, Vector3.up);
+
+        if (tiltAngle > uprightTiltAngle)
+        {
+            // Create a target roation that keeps the current forward direction but corrects the up vector
+            Quaternion targetRotation = Quaternion.FromToRotation(transform.up, Vector3.up) * transform.rotation;
+
+            // Smoothly interpolate towards the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * uprightCorrectionSpeed);
+        }
+    }
+
+    void CheckForStuck()
+    {
+        if (rb.velocity.magnitude < 1f)
+        {
+            stuckTimer += Time.fixedDeltaTime;
+        }
+        else
+        {
+            stuckTimer = 0f;
+        }
+
+        if (stuckTimer >= stuckTime)
+        {
+            Debug.Log("Car is stuck! Forcing a respawn");
+            Respawn();
+        }
+    }
+
+    void Respawn()
+    {
+        // TODO: Implement respawn logic
+
+        // Placeholder respawn logic
+        transform.position = new Vector3(100, 1, 0);
+        transform.rotation = Quaternion.identity;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        // Reset stuck timer
+        stuckTimer = 0f;
+    }
+
     public void ApplyBoost(float multiplier, float duration)
     {
         // If already boosting, reset the timer to extend the boost
@@ -206,6 +266,15 @@ public class CarController : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void OnHazardImpact(int damage, Vector3 bounceDirection)
+    {
+        // Take damage from the hazard
+        TakeDamage(damage);
+
+        // Apply bounceback force
+        rb.AddForce(bounceDirection.normalized * bounceForce, ForceMode.Impulse);
     }
 
     void Die()
