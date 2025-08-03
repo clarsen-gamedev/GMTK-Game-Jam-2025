@@ -14,11 +14,8 @@ public class TitleScreenManager : MonoBehaviour
     #region Inspector Variables
     [Header("UI Screens")]
     [SerializeField] GameObject titleUI;        // Reference to the screen to play and quit the game
-    [SerializeField] GameObject wizardUI;       // Reference to the screen which shows the wizard's introduction
+    [SerializeField] GameObject tutorialUI;     // Reference to the screen which shows the wizard's introduction
     [SerializeField] GameObject creditsUI;      // Reference to the screen which shows the credits
-
-    [Header("Audio")]
-    [SerializeField] AudioClip menuSelect;      // Sound that plays when a menu option is clicked
     #endregion
 
     #region Functions
@@ -27,8 +24,6 @@ public class TitleScreenManager : MonoBehaviour
     {
         // Resume game time
         Time.timeScale = 1f;
-
-        GetComponent<AudioSource>().clip = menuSelect;  // Load the audio clip for clicking a menu option
 
         // Unlock cursor
         Cursor.lockState = CursorLockMode.None;
@@ -41,14 +36,19 @@ public class TitleScreenManager : MonoBehaviour
     public void StartGame()
     {
         GetComponent<AudioSource>().Play();         // Play the button click sound effect
-        SceneManager.LoadScene("Connor Whitebox");  // Load the first level of the game
+        SceneManager.LoadScene("Connor Test");      // Load the first level of the game
     }
 
     // Quit Game Button
     public void QuitGame()
     {
-        GetComponent<AudioSource>().Play(); // Play the button click sound effect
-        Application.Quit();                 // Quit the game
+        GetComponent<AudioSource>().Play();         // Play the button click sound effect
+        Application.Quit();                         // Quit the game
+    }
+
+    public void ButtonTest()
+    {
+        Debug.Log("Button Pressed");
     }
     #endregion
 }

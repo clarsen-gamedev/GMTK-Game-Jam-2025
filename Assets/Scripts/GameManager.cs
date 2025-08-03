@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
     public AudioClip boostPad;
     public AudioClip pickupSound;
     public AudioClip wallBump;
-    public AudioClip loopComplete;
     public AudioClip countdown;
     public AudioClip goBeep;
 
