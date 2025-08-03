@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cycleCount: 0
+  loopCount: 0
+  deathCount: 0
 --- !u!1 &96613502
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b4491bf18017a40af9c602a2b7a8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 2
 --- !u!114 &542931560 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5932196452342549048, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
@@ -2000,6 +2001,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1574024029447663388, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050391759571033553, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_text
+      value: 'Cycle Complete!
+
+        Restarting the simulation...'
+      objectReference: {fileID: 0}
     - target: {fileID: 3089771967348463892, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2103,6 +2114,18 @@ PrefabInstance:
     - target: {fileID: 4124211320767935859, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713848878226672235, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730642295264668461, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730642295264668461, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 521.8
       objectReference: {fileID: 0}
     - target: {fileID: 5947815948900757308, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
