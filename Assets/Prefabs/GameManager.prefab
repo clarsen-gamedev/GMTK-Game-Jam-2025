@@ -66,13 +66,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  explosion: {fileID: 8300000, guid: 0a002f010c128fb45a665bab338acfb8, type: 3}
+  explosion: {fileID: 8300000, guid: 12b50e893b9015c4cae7dadef6229ce4, type: 3}
   carDriving: {fileID: 8300000, guid: 8e3757ad56c02c644b33d8745954bec0, type: 3}
   crateBreak: {fileID: 0}
-  gateOpen: {fileID: 0}
+  gateOpen: {fileID: 8300000, guid: f0a0774f941a4854da123645fe9d3891, type: 3}
   boostPad: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: 32f4a266ebe32f64cbe4490e4849809d, type: 3}
   wallBump: {fileID: 8300000, guid: 8e7918121c3a56c4c9ed63b68f765d87, type: 3}
-  loopComplete: {fileID: 0}
+  loopComplete: {fileID: 8300000, guid: f0a0774f941a4854da123645fe9d3891, type: 3}
   countdown: {fileID: 8300000, guid: 45c19ff37449d1048a9fdaaaff1026d1, type: 3}
   goBeep: {fileID: 0}

@@ -1065,6 +1065,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1899507590 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
+  m_PrefabInstance: {fileID: 6110701491616561646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5129522cb3d1e5e43a748634d5ad791b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1920405285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1383,6 +1394,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3376591117070971555, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1899507590}
     - target: {fileID: 3898347782406921178, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
       propertyPath: m_Name
       value: Game UI
@@ -1471,10 +1486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4713848878226672235, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5947815948900757308, guid: 88464a80d7b954d46ba644ad6632553d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1899507590}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -223,6 +224,19 @@ public class GameManager : MonoBehaviour
         // Switch to the game screen
         UISwitch(UIScreen.GAME);
 
+        // Play the music
+        HandleMusic(true);
+        playerCar.engineSource.Play();
+
+        // Play pause sound
+        countdownSource.clip = countdown;
+        countdownSource.loop = false;
+        countdownSource.Play();
+
+        // Lock the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         // Resume game time
         Time.timeScale = 1f;
         isPaused = false;
@@ -233,6 +247,15 @@ public class GameManager : MonoBehaviour
         // Switch to the pause screen
         UISwitch(UIScreen.PAUSE);
 
+        // Pause the music
+        HandleMusic(false);
+        playerCar.engineSource.Pause();
+
+        // Play pause sound
+        countdownSource.clip = countdown;
+        countdownSource.loop = false;
+        countdownSource.Play();
+
         // Unlock the cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -240,6 +263,11 @@ public class GameManager : MonoBehaviour
         // Pause game time
         Time.timeScale = 0f;
         isPaused = true;
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("Title Screen");
     }
 
     public void QuitGame()
@@ -270,6 +298,10 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.PLAYING)
         {
+            countdownSource.clip = gateOpen;
+            countdownSource.loop = false;
+            countdownSource.Play();
+
             loopsCompleted++;
 
             if (loopsCompleted < musicSources.Length)
@@ -376,7 +408,14 @@ public class GameManager : MonoBehaviour
             }
             else if (!isPlaying && musicSources[i].isPlaying)
             {
-                musicSources[i].Stop();
+                if (currentGameState == GameState.PLAYING)
+                {
+                    musicSources[i].Pause();
+                }
+                else if (currentGameState == GameState.RESPAWNING)
+                {
+                    musicSources[i].Stop();
+                }
             }
         }
     }
@@ -424,9 +463,9 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.RESPAWNING;
         Debug.Log("Respawn countdown starting...");
         yield return new WaitForSeconds(duration);
-        currentGameState = GameState.PLAYING;
-
+        
         HandleMusic(true);
+        currentGameState = GameState.PLAYING;
         playerCar.engineSource.clip = carDriving;
         playerCar.engineSource.loop = true;
         playerCar.engineSource.Play();
@@ -437,6 +476,7 @@ public class GameManager : MonoBehaviour
         OnGateOpened?.Invoke(currentGateIndex);
         gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
         gateOpenedText.gameObject.SetActive(true);
+        AddLoop();
 
         yield return new WaitForSeconds(gateOpenDuration);
 
