@@ -91,8 +91,9 @@ public class GameManager : MonoBehaviour
 
     // Game Sounds & Music
     [Header("Game Music")]
-    public AudioClip backgroundMusic;
-    public AudioSource musicSource;
+    public AudioClip[] bgMusicTracks;
+    public AudioSource countdownSource;
+    public AudioSource[] musicSources;
 
     [Header("Game Sounds")]
     public AudioClip explosion;
@@ -270,6 +271,14 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.PLAYING)
         {
             loopsCompleted++;
+
+            if (loopsCompleted < musicSources.Length)
+            {
+                musicSources[loopsCompleted].mute = false;
+            }
+
+            HandleMusic(true);
+
             Debug.Log("Loop Completed! Total loops: " + loopsCompleted);
 
             // Invoke the event to notify any listeners
@@ -355,17 +364,20 @@ public class GameManager : MonoBehaviour
 
     public void HandleMusic(bool isPlaying)
     {
-        if (musicSource == null || backgroundMusic == null) return;
+        if (countdownSource == null) return;
 
-        if (isPlaying && !musicSource.isPlaying)
+        for (int i = 0; i < musicSources.Length; i++)
         {
-            musicSource.clip = backgroundMusic;
-            musicSource.loop = true;
-            musicSource.Play();
-        }
-        else if (!isPlaying && musicSource.isPlaying)
-        {
-            musicSource.Stop();
+            if (isPlaying && !musicSources[i].isPlaying)
+            {
+                musicSources[i].clip = bgMusicTracks[i];
+                musicSources[i].loop = true;
+                musicSources[i].Play();
+            }
+            else if (!isPlaying && musicSources[i].isPlaying)
+            {
+                musicSources[i].Stop();
+            }
         }
     }
     #endregion
@@ -377,30 +389,30 @@ public class GameManager : MonoBehaviour
 
         gateOpenedText.text = "3";
         gateOpenedText.gameObject.SetActive(true);
-        musicSource.clip = countdown;
-        musicSource.loop = false;
-        musicSource.Play();
+        countdownSource.clip = countdown;
+        countdownSource.loop = false;
+        countdownSource.Play();
 
         yield return new WaitForSeconds(duration / 3);
 
         gateOpenedText.text = "2";
-        musicSource.clip = countdown;
-        musicSource.loop = false;
-        musicSource.Play();
+        countdownSource.clip = countdown;
+        countdownSource.loop = false;
+        countdownSource.Play();
 
         yield return new WaitForSeconds(duration / 3);
 
         gateOpenedText.text = "1";
-        musicSource.clip = countdown;
-        musicSource.loop = false;
-        musicSource.Play();
+        countdownSource.clip = countdown;
+        countdownSource.loop = false;
+        countdownSource.Play();
 
         yield return new WaitForSeconds(duration / 3);
 
         gateOpenedText.text = "GO!";
-        musicSource.clip = goBeep;
-        musicSource.loop = false;
-        musicSource.Play();
+        countdownSource.clip = goBeep;
+        countdownSource.loop = false;
+        countdownSource.Play();
         StartGame();
 
         yield return new WaitForSeconds(1f);
@@ -415,7 +427,7 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.PLAYING;
 
         HandleMusic(true);
-        playerCar.engineSource.clip = GameManager.Instance.carDriving;
+        playerCar.engineSource.clip = carDriving;
         playerCar.engineSource.loop = true;
         playerCar.engineSource.Play();
     }
