@@ -336,6 +336,12 @@ public class CarController : MonoBehaviour
     {
         currentCheckpoint = position;
     }
+
+    public void SetNewSpeed()
+    {
+        originalAccelerationForce = accelerationForce;
+        originalMaxSpeed = maxSpeed;
+    }
     #endregion
 
     #region Coroutines
