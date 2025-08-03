@@ -13,6 +13,7 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     public int gateIndex = 0;
+    public GameObject[] gatePieces;
 
     private Animator gateAnimator;
 
@@ -37,14 +38,24 @@ public class Gate : MonoBehaviour
         }
     }
 
-    void OpenGate(int openedGateIndex)
+    public void OpenGate(int openedGateIndex)
     {
         if (openedGateIndex == gateIndex)
         {
             Debug.Log("Gate " + gateIndex + " received open signal. Playing animation.");
-            if (gateAnimator != null)
+            if (gateIndex == GameManager.Instance.CurrentGateIndex)
             {
-                gateAnimator.SetTrigger("Open");
+                for (int i = 0; i < gatePieces.Length; i++)
+                {
+                    if (gatePieces[i].activeSelf)
+                    {
+                        gatePieces[i].SetActive(false);
+                    }
+                    else
+                    {
+                        gatePieces[i].SetActive(true);
+                    }
+                }
             }
         }
     }

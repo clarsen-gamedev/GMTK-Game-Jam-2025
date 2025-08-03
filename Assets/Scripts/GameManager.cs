@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     public int LoopsCompleted { get { return loopsCompleted; } }
     public int Deaths {  get { return deaths; } }
     public int CratesBroken { get { return currentCratesBroken; } }
+    public int CurrentGateIndex { get { return currentGateIndex; } }
 
     // Events to notify other scripts of changes
     public Action OnGameStart;
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
     [Header("Gate Logic")]
     public int[] cratesRequiredForGate;
     public float gateOpenDuration = 3.0f;
+    public Gate[] gates;
     #endregion
 
     // Game Sounds & Music
@@ -473,7 +475,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenGate(int gateIndex)
     {
-        OnGateOpened?.Invoke(currentGateIndex);
+        gates[gateIndex].OpenGate(gateIndex);
         gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
         gateOpenedText.gameObject.SetActive(true);
         AddLoop();

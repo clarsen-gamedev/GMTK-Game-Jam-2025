@@ -77,6 +77,8 @@ public class CarController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         originalMaxSpeed = maxSpeed;
         originalAccelerationForce = accelerationForce;
+        transform.position = spawnPosition.position;
+        transform.rotation = spawnPosition.rotation;
     }
 
     void Start()
