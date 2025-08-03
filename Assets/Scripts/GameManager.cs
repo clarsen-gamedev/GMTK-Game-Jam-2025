@@ -332,6 +332,10 @@ public class GameManager : MonoBehaviour
 
             HandleMusic(true);
 
+            // Boost car speed on loop completion
+            playerCar.accelerationForce *= 1.3f;
+            playerCar.maxSpeed *= 1.3f;
+
             Debug.Log("Loop Completed! Total loops: " + loopsCompleted);
 
             // Invoke the event to notify any listeners
