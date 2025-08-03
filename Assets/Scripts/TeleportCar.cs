@@ -16,6 +16,7 @@ public class TeleportCar : MonoBehaviour
         {
             car.transform.position = targetDestination.position;
             car.transform.rotation = targetDestination.rotation;
+            car.SetNewCheckpoint(targetDestination);
         }
     }
     #endregion
