@@ -53,10 +53,19 @@ MonoBehaviour:
   cratesBrokenText: {fileID: 0}
   gateOpenedText: {fileID: 0}
   healthSlider: {fileID: 0}
-  cratesRequiredForGate: 050000000a0000000f000000
+  cratesRequiredForGate: 050000000500000005000000
   gateOpenDuration: 3
-  backgroundMusic: {fileID: 8300000, guid: c34ecdfa6bfe9c342b247d90004820f1, type: 3}
-  musicSource: {fileID: 0}
+  bgMusicTracks:
+  - {fileID: 8300000, guid: d7e846bd26c25cb42a9f1450d2ce721a, type: 3}
+  - {fileID: 8300000, guid: a64d5f50adf22b74c9f0d9c466afe326, type: 3}
+  - {fileID: 8300000, guid: 7c837963da9bbab4189c2ed37a80c28d, type: 3}
+  - {fileID: 8300000, guid: ba7a721bc096f42409e4dfceb4715759, type: 3}
+  countdownSource: {fileID: 0}
+  musicSources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   explosion: {fileID: 8300000, guid: 0a002f010c128fb45a665bab338acfb8, type: 3}
   carDriving: {fileID: 8300000, guid: 8e3757ad56c02c644b33d8745954bec0, type: 3}
   crateBreak: {fileID: 0}
