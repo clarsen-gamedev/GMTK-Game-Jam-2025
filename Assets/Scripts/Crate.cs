@@ -19,6 +19,7 @@ public class Crate : MonoBehaviour
 
     #region Private Variables
     private Transform mainCameraTransform;
+    private AudioSource boxBreakSource;
     #endregion
 
     #region Functions
@@ -33,6 +34,8 @@ public class Crate : MonoBehaviour
         {
             Debug.LogError("Crate script could not find the Main Camera! Please ensure a camera is tagged as 'MainCamera'");
         }
+
+        boxBreakSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -66,19 +69,25 @@ public class Crate : MonoBehaviour
             if (explosionPrefab != null)
             {
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                boxBreakSource.clip = GameManager.Instance.crateBreak;
+                boxBreakSource.Play();
             }
 
-            DestroyHazard();
+            StartCoroutine(DestroyHazard());
         }
     }
 
-    void DestroyHazard()
+    IEnumerator DestroyHazard()
     {
         // Play explosion prefab
         if (explosionPrefab != null)
         {
+            GetComponent<SpriteRenderer>().enabled = false;
             Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
+
+        yield return new WaitForSeconds(1f);
+
         // Destroy this GameObject
         Destroy(gameObject);
     }

@@ -55,6 +55,10 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   cratesRequiredForGate: 050000000500000005000000
   gateOpenDuration: 3
+  gates:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   bgMusicTracks:
   - {fileID: 8300000, guid: d7e846bd26c25cb42a9f1450d2ce721a, type: 3}
   - {fileID: 8300000, guid: a64d5f50adf22b74c9f0d9c466afe326, type: 3}
@@ -68,9 +72,9 @@ MonoBehaviour:
   - {fileID: 0}
   explosion: {fileID: 8300000, guid: 69f51885a51c96141be0f2128b1f2204, type: 3}
   carDriving: {fileID: 8300000, guid: 8e3757ad56c02c644b33d8745954bec0, type: 3}
-  crateBreak: {fileID: 0}
+  crateBreak: {fileID: 8300000, guid: 0e104943b295f6f4fbe9a7f36b941bdd, type: 3}
   gateOpen: {fileID: 8300000, guid: 6c72712051eff294191674eca2e0e6a4, type: 3}
-  boostPad: {fileID: 0}
+  boostPad: {fileID: 8300000, guid: 76f4547d340c0d94baa801992716c7bc, type: 3}
   pickupSound: {fileID: 8300000, guid: 32f4a266ebe32f64cbe4490e4849809d, type: 3}
   wallBump: {fileID: 8300000, guid: 8e7918121c3a56c4c9ed63b68f765d87, type: 3}
   countdown: {fileID: 8300000, guid: 45c19ff37449d1048a9fdaaaff1026d1, type: 3}
