@@ -22,6 +22,8 @@ public class Hazard : MonoBehaviour
 
     #region Private Variables
     private AudioSource explosionSound;
+    private AudioSource explosionSoundCone;
+    private AudioSource explosionSoundPoisonCrate;
     private Transform mainCameraTransform;
     private SpriteRenderer hazardRenderer;
     private Collider hazardCollider;
@@ -34,6 +36,8 @@ public class Hazard : MonoBehaviour
     {
         // Cache the components and initial transform values on awake
         explosionSound = GetComponent<AudioSource>();
+        explosionSoundCone = GetComponent<AudioSource>();
+        explosionSoundPoisonCrate = GetComponent<AudioSource>();
         hazardRenderer = GetComponent<SpriteRenderer>();
         hazardCollider = GetComponent<Collider>();
         initialPosition = transform.position;
@@ -86,8 +90,21 @@ public class Hazard : MonoBehaviour
     {
         if (explosionPrefab != null)
         {
-            explosionSound.clip = GameManager.Instance.explosion;
-            explosionSound.Play();
+            if(gameObject.tag == "Cones")
+            {
+                explosionSoundCone.clip = GameManager.Instance.explosionCones;
+                explosionSoundCone.Play();
+            }
+            else if (gameObject.tag == "PoisonCrate")
+            {
+                explosionSoundPoisonCrate.clip = GameManager.Instance.explosionPoisonBox;
+                explosionSoundPoisonCrate.Play();
+            }
+            else
+            {
+                explosionSound.clip = GameManager.Instance.explosion;
+                explosionSound.Play();
+            }
             Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
 
