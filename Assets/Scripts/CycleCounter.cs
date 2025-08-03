@@ -33,6 +33,8 @@ public class CycleCounter : MonoBehaviour
 
     #region Public Variables
     public int cycleCount = 0;
+    public int loopCount = 0;
+    public int deathCount = 0;
     #endregion
 
     #region Functions
