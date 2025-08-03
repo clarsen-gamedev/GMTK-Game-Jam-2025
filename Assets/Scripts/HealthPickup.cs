@@ -74,7 +74,7 @@ public class HealthPickup : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CarController car = other.gameObject.GetComponent<CarController>();
-        if (car != null)
+        if (car != null && other.tag == "Player")
         {
             car.HealDamage(healAmount);
         }
