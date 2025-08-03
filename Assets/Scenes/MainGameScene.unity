@@ -1328,23 +1328,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1488704131}
     m_Modifications:
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -69.7
+      value: -28.872356
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.19
+      value: -3.6024873
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -71.5
+      value: -143.01096
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1352,15 +1352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1383,6 +1383,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
+--- !u!4 &803030815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2930892398072525565, guid: 02ca3b773eed6ad469500a03810fbbe7, type: 3}
+  m_PrefabInstance: {fileID: 803030814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &811779497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,6 +2374,7 @@ Transform:
   - {fileID: 960065206}
   - {fileID: 1783891705}
   - {fileID: 353297464}
+  - {fileID: 803030815}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3009,6 +3015,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1677558343}
     - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
+      propertyPath: explosionCones
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d96766ed54684d4f8f8e727f222ab43, type: 3}
+    - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
       propertyPath: gateOpenedText
       value: 
       objectReference: {fileID: 1982187695}
@@ -3020,6 +3030,10 @@ PrefabInstance:
       propertyPath: cratesBrokenText
       value: 
       objectReference: {fileID: 399551209}
+    - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
+      propertyPath: explosionPoisonBox
+      value: 
+      objectReference: {fileID: 8300000, guid: 60c94eabd46f4674fbad204b3902b5fd, type: 3}
     - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
       propertyPath: gates.Array.data[0]
       value: 

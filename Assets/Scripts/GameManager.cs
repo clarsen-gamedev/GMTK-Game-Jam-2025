@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Sounds")]
     public AudioClip explosion;
+    public AudioClip explosionCones;
+    public AudioClip explosionPoisonBox;
     public AudioClip carDriving;
     public AudioClip crateBreak;
     public AudioClip gateOpen;
