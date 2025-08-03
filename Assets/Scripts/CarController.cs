@@ -57,6 +57,7 @@ public class CarController : MonoBehaviour
     private float turnInput;
     private float currentSpeed;
     private bool isGrounded;
+    private Transform currentCheckpoint;
 
     // Boost pad settings
     private float originalMaxSpeed;
@@ -77,6 +78,8 @@ public class CarController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         originalMaxSpeed = maxSpeed;
         originalAccelerationForce = accelerationForce;
+
+        currentCheckpoint = spawnPosition;
         transform.position = spawnPosition.position;
         transform.rotation = spawnPosition.rotation;
     }
@@ -229,8 +232,8 @@ public class CarController : MonoBehaviour
         carModel.SetActive(true);
 
         // Placeholder respawn logic
-        transform.position = spawnPosition.position;
-        transform.rotation = Quaternion.identity;
+        transform.position = currentCheckpoint.position;
+        transform.rotation = currentCheckpoint.rotation;
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -327,6 +330,11 @@ public class CarController : MonoBehaviour
         GameManager.Instance.HandleMusic(false);
 
         StartCoroutine(WaitForExplosion(1f));
+    }
+
+    public void SetNewCheckpoint(Transform position)
+    {
+        currentCheckpoint = position;
     }
     #endregion
 

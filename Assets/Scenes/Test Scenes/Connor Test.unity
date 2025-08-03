@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationForce: 3000
   maxSpeed: 30
-  spawnPosition: {fileID: 0}
+  spawnPosition: {fileID: 1053661966}
   carModel: {fileID: 4961192733529267104}
   turnSpeed: 3
   turnSmoothing: 15
