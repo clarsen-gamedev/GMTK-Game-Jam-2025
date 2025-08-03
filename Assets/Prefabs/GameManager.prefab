@@ -53,9 +53,10 @@ MonoBehaviour:
   cratesBrokenText: {fileID: 0}
   gateOpenedText: {fileID: 0}
   healthSlider: {fileID: 0}
-  cratesRequiredForGate: 050000000500000005000000
+  cratesRequiredForGate: 050000000a0000000f0000001e000000
   gateOpenDuration: 3
   gates:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -71,6 +72,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   explosion: {fileID: 8300000, guid: 69f51885a51c96141be0f2128b1f2204, type: 3}
+  explosionCones: {fileID: 0}
+  explosionPoisonBox: {fileID: 0}
   carDriving: {fileID: 8300000, guid: 8e3757ad56c02c644b33d8745954bec0, type: 3}
   crateBreak: {fileID: 8300000, guid: 0e104943b295f6f4fbe9a7f36b941bdd, type: 3}
   gateOpen: {fileID: 8300000, guid: 6c72712051eff294191674eca2e0e6a4, type: 3}
