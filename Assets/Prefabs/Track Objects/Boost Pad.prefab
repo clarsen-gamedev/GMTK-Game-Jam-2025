@@ -121,4 +121,4 @@ MonoBehaviour:
   boostMultiplier: 1.8
   boostDuration: 2
   boostParticles: {fileID: 0}
-  boostSound: {fileID: 0}
+  boostSound: {fileID: 8300000, guid: 76f4547d340c0d94baa801992716c7bc, type: 3}
