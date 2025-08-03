@@ -42,5 +42,10 @@ public class CycleCounter : MonoBehaviour
     {
         cycleCount++;
     }
+
+    public void DestroyCounter()
+    {
+        Destroy(gameObject);
+    }
     #endregion
 }

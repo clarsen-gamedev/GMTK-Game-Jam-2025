@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
         // Enable the game UI on startup
         currentScreen = UIScreen.GAME;
         UISwitch(UIScreen.GAME);
+        UpdateUI();
 
         SetupUI();
         UpdateCratesBrokenUI();
@@ -279,6 +280,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("Title Screen");
+        CycleCounter.CounterInstance.DestroyCounter();
         Destroy(gameObject);
     }
 
