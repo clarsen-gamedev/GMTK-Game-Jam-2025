@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("Title Screen");
+        Destroy(gameObject);
     }
 
     public void QuitGame()
