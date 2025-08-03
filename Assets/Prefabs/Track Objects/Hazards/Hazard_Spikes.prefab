@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675f6e40570495043bb7b93df00b494b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  damageAmount: 3
   respawnDelay: 5
   explosionPrefab: {fileID: 5842839900216320687, guid: b8b16d183e7862e41bf129dea6738f1e, type: 3}
 --- !u!212 &2463940620598724398
@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5eeef53b8ecb14949a0aaf0d09af25f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56f8f761c8d8a3c47b299c451f64afba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
