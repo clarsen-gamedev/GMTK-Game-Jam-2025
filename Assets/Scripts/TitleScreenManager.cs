@@ -36,7 +36,7 @@ public class TitleScreenManager : MonoBehaviour
     public void StartGame()
     {
         GetComponent<AudioSource>().Play();         // Play the button click sound effect
-        SceneManager.LoadScene("Connor Test");      // Load the first level of the game
+        SceneManager.LoadScene("MainGameScene");      // Load the first level of the game
     }
 
     // Quit Game Button

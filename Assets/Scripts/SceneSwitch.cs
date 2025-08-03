@@ -11,7 +11,7 @@ public class SceneSwitch : MonoBehaviour
         Time.timeScale = 1f;
         CycleCounter.CounterInstance.cycleCount++;
         Debug.Log("Current Cycle Count: " + CycleCounter.CounterInstance.cycleCount);
-        SceneManager.LoadScene("Connor Test");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     // Update is called once per frame

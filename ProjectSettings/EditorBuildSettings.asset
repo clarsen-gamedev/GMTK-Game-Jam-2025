@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: c10569b214af0c94db87c680481b395e
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Connor Test.unity
-    guid: 91646a71232044c4a95bc2282c204f90
+    path: Assets/Scenes/MainGameScene.unity
+    guid: e3b5467ebefc0bf4bbdad33c36159565
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
