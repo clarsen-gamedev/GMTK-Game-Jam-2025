@@ -497,7 +497,21 @@ public class GameManager : MonoBehaviour
         if (gateIndex < 3)
         {
             gates[gateIndex].OpenGate(gateIndex);
-            gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
+
+            if (gateIndex == 0)
+            {
+                gateOpenedText.text = "Middle Gate Open!";
+            }
+            else if (gateIndex == 1)
+            {
+                gateOpenedText.text = "Ramp Unlocked, Head On Up!";
+            }
+            else if (gateIndex == 2)
+            {
+                gateOpenedText.text = "Head Back to the Middle!";
+            }
+
+            
             gateOpenedText.gameObject.SetActive(true);
             AddLoop();
 
