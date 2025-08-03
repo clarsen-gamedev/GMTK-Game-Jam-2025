@@ -1688,6 +1688,10 @@ PrefabInstance:
       propertyPath: musicSources.Array.data[3]
       value: 
       objectReference: {fileID: 9198694628954622269}
+    - target: {fileID: 2143676848277119149, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
+      propertyPath: cratesRequiredForGate.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2557469913278730130, guid: 9fb957b9d4413b245a14d80cc3bfa28a, type: 3}
       propertyPath: m_Name
       value: GameManager
