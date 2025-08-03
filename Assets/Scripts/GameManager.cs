@@ -336,7 +336,7 @@ public class GameManager : MonoBehaviour
 
             // Boost car speed on loop completion
             playerCar.accelerationForce *= 1.1f;
-            playerCar.maxSpeed *= 1.5f;
+            playerCar.maxSpeed *= 1.3f;
             playerCar.SetNewSpeed();
 
             Debug.Log("Loop Completed! Total loops: " + loopsCompleted);
