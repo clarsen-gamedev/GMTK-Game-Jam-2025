@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);            // Makes sure only one GameManager exists at all times
         }
+
+        if (CycleCounter.CounterInstance != null)
+        {
+            loopsCompleted = CycleCounter.CounterInstance.loopCount;
+            deaths = CycleCounter.CounterInstance.deathCount;
+        }
     }
     #endregion
 
@@ -277,6 +283,15 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void RestartSimulation()
+    {
+        CycleCounter.CounterInstance.loopCount += loopsCompleted;
+        CycleCounter.CounterInstance.deathCount += deaths;
+
+        SceneManager.LoadScene("SampleScene");
+        Destroy(gameObject);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -480,17 +495,31 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenGate(int gateIndex)
     {
-        gates[gateIndex].OpenGate(gateIndex);
-        gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
-        gateOpenedText.gameObject.SetActive(true);
-        AddLoop();
+        if (gateIndex < 3)
+        {
+            gates[gateIndex].OpenGate(gateIndex);
+            gateOpenedText.text = "Gate " + (currentGateIndex + 1) + " Opened";
+            gateOpenedText.gameObject.SetActive(true);
+            AddLoop();
 
-        yield return new WaitForSeconds(gateOpenDuration);
+            yield return new WaitForSeconds(gateOpenDuration);
 
-        gateOpenedText.gameObject.SetActive(false);
-        currentCratesBroken = 0;
-        currentGateIndex++;
-        UpdateCratesBrokenUI();
+            gateOpenedText.gameObject.SetActive(false);
+            currentCratesBroken = 0;
+            currentGateIndex++;
+            UpdateCratesBrokenUI();
+        }
+        else
+        {
+            gateOpenedText.text = "Cycle Complete!" + "\n" + "Restarting the simulation...";
+            gateOpenedText.gameObject.SetActive(true);
+            AddLoop();
+
+            yield return new WaitForSeconds(gateOpenDuration);
+
+            gateOpenedText.gameObject.SetActive(false);
+            RestartSimulation();
+        }
     }
     #endregion
 }
