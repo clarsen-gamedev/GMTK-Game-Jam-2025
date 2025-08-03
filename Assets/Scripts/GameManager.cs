@@ -111,6 +111,9 @@ public class GameManager : MonoBehaviour
     public AudioClip countdown;
     public AudioClip goBeep;
 
+    [Header("Wall Damage")]
+    public int wallDamage = 2;
+
     #region Private Variables
     private GameState currentGameState;
     private UIScreen currentScreen;

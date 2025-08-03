@@ -14,11 +14,6 @@ using UnityEngine;
 
 public class WallHazard : MonoBehaviour
 {
-    #region Public and Serialized Variables
-    [Header("Hazard Settings")]
-    public int damageAmount = 10;   // The amount of damage this hazard will deal to the car
-    #endregion
-
     #region Functions
     void OnCollisionEnter(Collision collision)
     {
@@ -29,7 +24,7 @@ public class WallHazard : MonoBehaviour
             Vector3 bounceDirection = collision.contacts[0].normal;
 
             // Take damage
-            car.OnHazardImpact(damageAmount, bounceDirection);
+            car.OnHazardImpact(GameManager.Instance.wallDamage, bounceDirection);
         }
     }
     #endregion
