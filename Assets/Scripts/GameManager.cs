@@ -48,12 +48,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);            // Makes sure only one GameManager exists at all times
         }
-
-        if (CycleCounter.CounterInstance != null)
-        {
-            loopsCompleted = CycleCounter.CounterInstance.loopCount;
-            deaths = CycleCounter.CounterInstance.deathCount;
-        }
     }
     #endregion
 
@@ -137,6 +131,11 @@ public class GameManager : MonoBehaviour
         // Set the initial game state
         currentGameState = GameState.READY;
         Debug.Log("GameManager initialized. State: " + currentGameState);
+        if (CycleCounter.CounterInstance != null)
+        {
+            loopsCompleted = CycleCounter.CounterInstance.loopCount;
+            deaths = CycleCounter.CounterInstance.deathCount;
+        }
 
         // Enable the game UI on startup
         currentScreen = UIScreen.GAME;
